@@ -9,8 +9,17 @@ project(PowerEditor LANGUAGES CXX C OBJCXX)
 # Platform-specific main entry point
 if(APPLE)
     set(MAIN_SOURCE
-        # TODO: Create src/main_mac.mm
-        # For now, using a placeholder
+        src/main_mac.mm
+    )
+    
+    set(COCOA_SOURCES
+        src/cocoa/AppDelegate.mm
+        src/cocoa/NotepadPlusWindowController.mm
+    )
+    
+    set(COCOA_HEADERS
+        src/cocoa/AppDelegate.h
+        src/cocoa/NotepadPlusWindowController.h
     )
 elseif(WIN32)
     set(MAIN_SOURCE
@@ -62,19 +71,25 @@ include_directories(
 if(APPLE)
     # Create macOS app bundle
     add_executable(notepadpp MACOSX_BUNDLE
+        # Main entry point
+        ${MAIN_SOURCE}
+        # Cocoa UI
+        ${COCOA_SOURCES}
+        ${COCOA_HEADERS}
         # Platform abstraction layer
         ${PLATFORM_SOURCES}
         ${PLATFORM_HEADERS}
-        # Core sources
-        ${CORE_SOURCES}
-        ${SCINTILLA_COMPONENT_SOURCES}
+        # Core sources (commented out for now - will add as ported)
+        # ${CORE_SOURCES}
+        # ${SCINTILLA_COMPONENT_SOURCES}
     )
     
     # Link frameworks
     target_link_libraries(notepadpp
-        scintilla
-        lexilla
-        boostregex
+        # Scintilla and Lexilla temporarily disabled until we integrate them
+        # scintilla
+        # lexilla
+        # boostregex
         ${COCOA_FRAMEWORK}
         ${FOUNDATION_FRAMEWORK}
         ${APPKIT_FRAMEWORK}
