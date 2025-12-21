@@ -63,6 +63,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src/MISC/Common
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ScintillaComponent
     ${CMAKE_SOURCE_DIR}/scintilla/include
+    ${CMAKE_SOURCE_DIR}/scintilla/cocoa
     ${CMAKE_SOURCE_DIR}/lexilla/include
 )
 
@@ -86,10 +87,9 @@ if(APPLE)
     
     # Link frameworks
     target_link_libraries(notepadpp
-        # Scintilla and Lexilla temporarily disabled until we integrate them
-        # scintilla
-        # lexilla
-        # boostregex
+        scintilla
+        lexilla
+        # boostregex  # Not needed yet
         ${COCOA_FRAMEWORK}
         ${FOUNDATION_FRAMEWORK}
         ${APPKIT_FRAMEWORK}

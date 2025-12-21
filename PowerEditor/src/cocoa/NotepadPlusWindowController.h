@@ -16,12 +16,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+// Forward declaration
+@class ScintillaView;
+
 // Window controller for the main Notepad++ window
 // This manages the main editing window and its components
 @interface NotepadPlusWindowController : NSWindowController <NSWindowDelegate>
 
 // Window components
-@property (strong, nonatomic) NSTextView* textView;
+@property (strong, nonatomic) ScintillaView* textView;
 @property (strong, nonatomic) NSScrollView* scrollView;
 @property (strong, nonatomic) NSToolbar* toolbar;
 
